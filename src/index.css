@@ -1,0 +1,14 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+}
