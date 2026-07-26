@@ -1,12 +1,5 @@
-
-
 function App() {
-
-  return (
-    <>
-      <h1>Async Race</h1>
-    </>
-  )
+  return <h1>Async Race</h1>;
 }
 
-export default App
+export default App;
