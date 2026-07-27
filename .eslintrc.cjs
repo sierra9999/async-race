@@ -24,5 +24,6 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'max-lines-per-function': ['error', { max: 40, skipBlankLines: true, skipComments: true }],
     'no-param-reassign': ['error', { props: true, ignorePropertyModificationsFor: ['state'] }],
+    'import/extensions': 'off',
   },
 };
