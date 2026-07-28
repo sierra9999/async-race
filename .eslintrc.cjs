@@ -9,6 +9,7 @@ module.exports = {
   extends: ['airbnb', 'airbnb-typescript', 'airbnb/hooks', 'prettier'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
+    warnOnUnsupportedTypeScriptVersion: false,
     project: ['./tsconfig.app.json', './tsconfig.node.json'],
     tsconfigRootDir: __dirname,
     ecmaFeatures: {
