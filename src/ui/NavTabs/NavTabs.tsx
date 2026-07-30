@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { ROUTES } from '@/constants/constants';
+import { ROUTES } from '@/constants';
 import styles from './NavTabs.module.css';
 
 function linkClassName({ isActive }: { isActive: boolean }): string {
