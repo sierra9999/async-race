@@ -8,10 +8,12 @@ function App() {
   return (
     <>
       <NavTabs />
-      <Routes>
-        <Route path={ROUTES.GARAGE} element={<GaragePage />} />
-        <Route path={ROUTES.WINNERS} element={<WinnersPage />} />
-      </Routes>
+      <main>
+        <Routes>
+          <Route path={ROUTES.GARAGE} element={<GaragePage />} />
+          <Route path={ROUTES.WINNERS} element={<WinnersPage />} />
+        </Routes>
+      </main>
     </>
   );
 }

@@ -1,5 +1,5 @@
 function WinnersPage() {
-  return <div>winners</div>;
+  return <h1>Winners</h1>;
 }
 
 export default WinnersPage;
