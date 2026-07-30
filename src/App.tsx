@@ -1,8 +1,8 @@
 import { Route, Routes } from 'react-router-dom';
-import { ROUTES } from './constants/constants';
-import NavTabs from './ui/NavTabs/NavTabs';
-import GaragePage from './features/garage/GaragePage';
-import WinnersPage from './features/winners/WinnersPage';
+import GaragePage from '@/features/garage/GaragePage';
+import { ROUTES } from '@/constants/constants';
+import NavTabs from '@/ui/NavTabs/NavTabs';
+import WinnersPage from '@/features/winners/WinnersPage';
 
 function App() {
   return (
