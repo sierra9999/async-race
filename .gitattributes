@@ -1,0 +1,2 @@
+# Force LF everywhere. Prettier is set to endOfLine: "lf" and Windows checkouts aren't.
+* text=auto eol=lf
