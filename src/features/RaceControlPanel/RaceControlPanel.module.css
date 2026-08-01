@@ -1,0 +1,12 @@
+.panel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+.raceGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
