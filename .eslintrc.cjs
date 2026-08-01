@@ -27,9 +27,12 @@ module.exports = {
     'max-lines-per-function': ['error', { max: 40, skipBlankLines: true, skipComments: true }],
     'no-param-reassign': ['error', { props: true, ignorePropertyModificationsFor: ['state'] }],
     'import/extensions': 'off',
-    'react/require-default-props': ['error', {
-      forbidDefaultForRequired: true,
-      ignoreFunctionalComponents: true,
-    }],
+    'react/require-default-props': [
+      'error',
+      {
+        forbidDefaultForRequired: true,
+        ignoreFunctionalComponents: true,
+      },
+    ],
   },
 };
