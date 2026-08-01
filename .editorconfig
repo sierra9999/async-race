@@ -1,0 +1,12 @@
+# Editor-side defaults, so new files are written correctly in the first place.
+# .gitattributes fixes line endings at commit time; this stops them being wrong
+# before that. Values match .prettierrc.json.
+root = true
+
+[*]
+end_of_line = lf
+charset = utf-8
+indent_style = space
+indent_size = 2
+insert_final_newline = true
+trim_trailing_whitespace = true
