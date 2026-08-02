@@ -11,7 +11,7 @@
     "lint:fix": "eslint --fix --ext .ts,.tsx src",
     "format": "prettier --write .",
     "ci:format": "prettier --check .",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc -b --noEmit",
     "prepare": "husky"
   },
   "lint-staged": {
