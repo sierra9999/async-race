@@ -1,4 +1,3 @@
-import type { ChangeEventHandler } from 'react';
 import styles from './ColorInput.module.css';
 
 interface ColorInputProps {
@@ -8,16 +7,12 @@ interface ColorInputProps {
 }
 
 function ColorInput({ value, onChange, disabled = false }: ColorInputProps) {
-  const handleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
-    onChange(event.target.value);
-  };
-
   return (
     <input
       type="color"
       className={styles.colorInput}
       value={value}
-      onChange={handleChange}
+      onChange={(event) => onChange(event.target.value)}
       disabled={disabled}
     />
   );
