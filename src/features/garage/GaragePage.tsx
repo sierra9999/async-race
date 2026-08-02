@@ -1,4 +1,4 @@
-import RaceControlPanel from '../RaceControlPanel/RaceControlPanel';
+import RaceControlPanel from './RaceControlPanel/RaceControlPanel';
 import styles from './GaragePage.module.css';
 
 function GaragePage() {
