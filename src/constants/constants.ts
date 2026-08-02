@@ -10,3 +10,5 @@ export const ROUTES = {
 } as const;
 
 export const RANDOM_CARS_COUNT = 100;
+
+export const DEFAULT_CAR_COLOR = '#000000';
