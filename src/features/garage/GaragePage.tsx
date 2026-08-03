@@ -4,6 +4,7 @@ import CarRow from './CarRow/CarRow';
 import styles from './GaragePage.module.css';
 import CreateCarForm from './CreateCarForm/CreateCarForm';
 import UpdateCarForm from './UpdateCarForm/UpdateCarForm';
+import Pagination from '@/ui/Pagination/Pagination';
 
 const CARS: Car[] = [
   { id: 1, name: 'Tesla', color: '#e11d48' },
@@ -25,6 +26,9 @@ function GaragePage() {
           <CarRow key={car.id} car={car} />
         ))}
       </ul>
+      <div className={styles.footer}>
+        <Pagination page={1} totalPages={3} onPageChange={() => {}} />
+      </div>
     </div>
   );
 }
