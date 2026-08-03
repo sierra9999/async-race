@@ -1,13 +1,26 @@
+import type { Car } from '@/api/types';
 import RaceControlPanel from './RaceControlPanel/RaceControlPanel';
+import CarRow from './CarRow/CarRow';
 import styles from './GaragePage.module.css';
+
+const CARS: Car[] = [
+  { id: 1, name: 'Tesla', color: '#e11d48' },
+  { id: 2, name: 'BMW', color: '#2563eb' },
+  { id: 3, name: 'Mersedes', color: '#14a34a' },
+];
 
 function GaragePage() {
   return (
     <div className={styles.page}>
-      <h1>Garage</h1>
+      <h1>Garage ({CARS.length})</h1>
       <div className={styles.controlRow}>
         <RaceControlPanel />
       </div>
+      <ul className={styles.list}>
+        {CARS.map((car) => (
+          <CarRow key={car.id} car={car} />
+        ))}
+      </ul>
     </div>
   );
 }
