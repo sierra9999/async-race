@@ -2,6 +2,8 @@ import type { Car } from '@/api/types';
 import RaceControlPanel from './RaceControlPanel/RaceControlPanel';
 import CarRow from './CarRow/CarRow';
 import styles from './GaragePage.module.css';
+import CreateCarForm from './CreateCarForm/CreateCarForm';
+import UpdateCarForm from './UpdateCarForm/UpdateCarForm';
 
 const CARS: Car[] = [
   { id: 1, name: 'Tesla', color: '#e11d48' },
@@ -15,6 +17,8 @@ function GaragePage() {
       <h1>Garage ({CARS.length})</h1>
       <div className={styles.controlRow}>
         <RaceControlPanel />
+        <CreateCarForm />
+        <UpdateCarForm />
       </div>
       <ul className={styles.list}>
         {CARS.map((car) => (
