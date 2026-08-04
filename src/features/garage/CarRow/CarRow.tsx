@@ -1,6 +1,8 @@
 import Button from '@/ui/Button/Button';
+import { useAppDispatch } from '@/store/hooks';
+import { setEditForm } from '@/store/garageUiSlice';
 import type { Car } from '@/api/types';
-import CarTrack from '@/features/garage/CarTrack/CarTrack';
+import CarTrack from '../CarTrack/CarTrack';
 import styles from './CarRow.module.css';
 
 interface CarRowProps {
@@ -8,10 +10,15 @@ interface CarRowProps {
 }
 
 function CarRow({ car }: CarRowProps) {
+  const dispatch = useAppDispatch();
+  const handleSelect = () => {
+    dispatch(setEditForm({ carId: car.id, name: car.name, color: car.color }));
+  };
+
   return (
     <li className={styles.row}>
       <div className={styles.stack}>
-        <Button>Select</Button>
+        <Button onClick={handleSelect}>Select</Button>
         <Button variant="danger">Remove</Button>
       </div>
       <div className={styles.stack}>

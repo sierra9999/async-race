@@ -8,6 +8,10 @@ export interface CarInput {
   color: string;
 }
 
+export interface UpdateCarInput extends CarInput {
+  id: number;
+}
+
 export const garageApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getCars: builder.query<PagedResult<Car>, number>({
@@ -19,7 +23,11 @@ export const garageApi = baseApi.injectEndpoints({
       query: (body) => ({ url: '/garage', method: 'POST', body }),
       invalidatesTags: ['Cars'],
     }),
+    updateCar: builder.mutation<Car, UpdateCarInput>({
+      query: ({ id, ...body }) => ({ url: `/garage/${id}`, method: 'PUT', body }),
+      invalidatesTags: ['Cars'],
+    }),
   }),
 });
 
-export const { useGetCarsQuery, useCreateCarMutation } = garageApi;
+export const { useGetCarsQuery, useCreateCarMutation, useUpdateCarMutation } = garageApi;
