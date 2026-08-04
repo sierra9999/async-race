@@ -1,0 +1,21 @@
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.table th,
+.table td {
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid #e5e7eb;
+  vertical-align: middle;
+}
+
+.table thead th {
+  font-weight: 700;
+  color: #374151;
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: #f9fafb;
+}

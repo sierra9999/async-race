@@ -160,3 +160,7 @@ export const CAR_MAKES = [
 ] as const;
 
 export const HEX_COLOR_LENGTH = 6;
+
+export const MS_PER_SECOND = 1000;
+
+export const TIME_DECIMALS = 2;

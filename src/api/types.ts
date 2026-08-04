@@ -8,3 +8,9 @@ export interface PagedResult<T> {
   items: T[];
   total: number;
 }
+
+export interface Winner {
+  id: number;
+  wins: number;
+  time: number;
+}
