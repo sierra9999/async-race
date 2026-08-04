@@ -2,7 +2,8 @@ import Button from '@/ui/Button/Button';
 import { useDeleteCarMutation } from '@/api/garageApi';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { setEditForm, resetEditForm } from '@/store/garageUiSlice';
-import { type CarRaceStatus } from '@/store/raceSlice';
+import { forgetCar, type CarRaceStatus } from '@/store/raceSlice';
+import { forgetCarTrack } from '@/features/race/animation';
 import useCarEngine from '@/features/race/useCarEngine';
 import type { Car } from '@/api/types';
 import CarTrack from '../CarTrack/CarTrack';
@@ -64,6 +65,8 @@ function CarRow({ car }: CarRowProps) {
   const handleRemove = async () => {
     try {
       await deleteCar(car.id).unwrap();
+      forgetCarTrack(car.id);
+      dispatch(forgetCar(car.id));
       if (selectedCarId === car.id) {
         dispatch(resetEditForm());
       }

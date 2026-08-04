@@ -102,3 +102,11 @@ export function resetCarPosition(id: number): void {
   registry.set(id, updated);
   paintEntry(updated);
 }
+
+export function forgetCarTrack(id: number): void {
+  const entry = registry.get(id);
+  if (entry) {
+    cancelIfRunning(entry);
+  }
+  registry.delete(id);
+}

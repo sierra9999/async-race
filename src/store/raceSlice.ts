@@ -23,8 +23,12 @@ const raceSlice = createSlice({
       const id = action.payload;
       state.generation[id] = (state.generation[id] ?? 0) + 1;
     },
+    forgetCar(state, action: PayloadAction<number>) {
+      delete state.carStates[action.payload];
+      delete state.generation[action.payload];
+    },
   },
 });
 
-export const { setCarState, bumpGeneration } = raceSlice.actions;
+export const { setCarState, bumpGeneration, forgetCar } = raceSlice.actions;
 export default raceSlice.reducer;
