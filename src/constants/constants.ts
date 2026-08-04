@@ -14,3 +14,7 @@ export const RANDOM_CARS_COUNT = 100;
 export const DEFAULT_CAR_COLOR = '#000000';
 
 export const CAR_NAME_MAX_LENGTH = 30;
+
+export const HTTP_NOT_FOUND = 404;
+
+export const HTTP_INTERNAL_ERROR = 500;
