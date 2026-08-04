@@ -4,12 +4,14 @@ export type CarRaceStatus = 'idle' | 'starting' | 'driving' | 'finished' | 'brok
 interface RaceState {
   carStates: Record<number, CarRaceStatus>;
   isRacing: boolean;
+  winner: { name: string; timeSec: number } | null;
   generation: Record<number, number>;
 }
 
 const initialState: RaceState = {
   carStates: {},
   isRacing: false,
+  winner: null,
   generation: {},
 };
 
@@ -24,6 +26,12 @@ const raceSlice = createSlice({
     setIsRacing(state, action: PayloadAction<boolean>) {
       state.isRacing = action.payload;
     },
+    announceWinner(state, action: PayloadAction<{ name: string; timeSec: number }>) {
+      state.winner = action.payload;
+    },
+    clearWinner(state) {
+      state.winner = null;
+    },
     bumpGeneration(state, action: PayloadAction<number>) {
       const id = action.payload;
       state.generation[id] = (state.generation[id] ?? 0) + 1;
@@ -35,5 +43,6 @@ const raceSlice = createSlice({
   },
 });
 
-export const { setCarState, setIsRacing, bumpGeneration, forgetCar } = raceSlice.actions;
+export const { setCarState, setIsRacing, announceWinner, clearWinner, bumpGeneration, forgetCar } =
+  raceSlice.actions;
 export default raceSlice.reducer;

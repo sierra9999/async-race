@@ -1,7 +1,8 @@
 import { useCallback } from 'react';
 import { store } from '@/store';
 import { useAppDispatch } from '@/store/hooks';
-import { setIsRacing, type CarRaceStatus } from '@/store/raceSlice';
+import { setIsRacing, announceWinner, clearWinner, type CarRaceStatus } from '@/store/raceSlice';
+import { msToSeconds } from '@/utils/formatTime';
 import type { Car } from '@/api/types';
 import useCarEngine from './useCarEngine';
 
@@ -32,6 +33,11 @@ function watchForRaceCompletion(carIds: number[]): void {
   });
 }
 
+function recordWin(car: Car, durationMs: number): void {
+  const timeSec = msToSeconds(durationMs);
+  store.dispatch(announceWinner({ name: car.name, timeSec }));
+}
+
 function useRace(): {
   startRace: (cars: Car[]) => void;
   resetRace: (carIds: number[]) => Promise<void>;
@@ -42,7 +48,20 @@ function useRace(): {
   const startRace = useCallback(
     (cars: Car[]) => {
       dispatch(setIsRacing(true));
-      cars.forEach((car) => start(car.id));
+      dispatch(clearWinner());
+
+      let won = false;
+
+      cars.forEach((car) => {
+        start(car.id, (durationMs) => {
+          if (won) {
+            return;
+          }
+          won = true;
+          recordWin(car, durationMs);
+        });
+      });
+
       watchForRaceCompletion(cars.map((car) => car.id));
     },
     [dispatch, start],
@@ -52,6 +71,7 @@ function useRace(): {
     async (carIds: number[]): Promise<void> => {
       const carsToStop = carIds.filter((id) => carStatus(id) !== 'idle');
       await Promise.allSettled(carsToStop.map((id) => stop(id)));
+      dispatch(clearWinner());
       dispatch(setIsRacing(false));
     },
     [dispatch, stop],

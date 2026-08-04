@@ -1,6 +1,7 @@
 import Pagination from '@/ui/Pagination/Pagination';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { setPage } from '@/store/garageUiSlice';
+import WinnerModal from '@/features/race/WinnerModal/WinnerModal';
 import RaceControlPanel from './RaceControlPanel/RaceControlPanel';
 import CreateCarForm from './CreateCarForm/CreateCarForm';
 import UpdateCarForm from './UpdateCarForm/UpdateCarForm';
@@ -16,6 +17,7 @@ function GaragePage() {
   return (
     <div className={styles.page}>
       <h1>Garage ({total})</h1>
+      <WinnerModal />
       <div className={styles.controlRow}>
         <RaceControlPanel isGarageEmpty={!isLoading && !isError && total === 0} cars={cars} />
         <CreateCarForm />
