@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import type { FetchBaseQueryError } from '@reduxjs/toolkit/query/react';
 import { store } from '@/store';
-import { setCarState, bumpGeneration } from '@/store/raceSlice';
+import { setCarState, bumpGeneration, type CarRaceStatus } from '@/store/raceSlice';
 import { useStartEngineMutation, useStopEngineMutation, useDriveMutation } from '@/api/engineApi';
 import { HTTP_INTERNAL_ERROR } from '@/constants';
 import { startCarAnimation, stopCarAnimation, resetCarPosition } from './animation';
@@ -85,7 +85,8 @@ function handleStartFailure(id: number, generation: number): void {
   if (currentGeneration(id) !== generation) {
     return;
   }
-  store.dispatch(setCarState({ id, status: 'idle' }));
+  const status: CarRaceStatus = store.getState().race.isRacing ? 'broken' : 'idle';
+  store.dispatch(setCarState({ id, status }));
 }
 
 function useCarEngine(): {

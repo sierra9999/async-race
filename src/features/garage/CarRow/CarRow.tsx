@@ -31,14 +31,15 @@ function SelectRemoveStack({ disabled, onSelect, onRemove }: SelectRemoveStackPr
 
 interface EngineStackProps {
   carState: CarRaceStatus;
+  isRacing: boolean;
   onStart: () => void;
   onStop: () => void;
 }
 
-function EngineStack({ carState, onStart, onStop }: EngineStackProps) {
+function EngineStack({ carState, isRacing, onStart, onStop }: EngineStackProps) {
   return (
     <div className={styles.stack}>
-      <Button variant="primary" disabled={carState !== 'idle'} onClick={onStart}>
+      <Button variant="primary" disabled={carState !== 'idle' || isRacing} onClick={onStart}>
         A
       </Button>
       <Button disabled={STOP_DISABLED_STATES.includes(carState)} onClick={onStop}>
@@ -57,6 +58,7 @@ function CarRow({ car }: CarRowProps) {
   const [deleteCar] = useDeleteCarMutation();
   const selectedCarId = useAppSelector((state) => state.garageUi.editForm.carId);
   const carState = useAppSelector((state) => state.race.carStates[car.id] ?? 'idle');
+  const isRacing = useAppSelector((state) => state.race.isRacing);
   const { start, stop } = useCarEngine();
   const rowLocked = carState !== 'idle';
   const handleSelect = () => {
@@ -78,7 +80,12 @@ function CarRow({ car }: CarRowProps) {
   return (
     <li className={styles.row}>
       <SelectRemoveStack disabled={rowLocked} onSelect={handleSelect} onRemove={handleRemove} />
-      <EngineStack carState={carState} onStart={() => start(car.id)} onStop={() => stop(car.id)} />
+      <EngineStack
+        carState={carState}
+        isRacing={isRacing}
+        onStart={() => start(car.id)}
+        onStop={() => stop(car.id)}
+      />
       <span className={styles.name}>{car.name}</span>
       <CarTrack carId={car.id} color={car.color} />
     </li>

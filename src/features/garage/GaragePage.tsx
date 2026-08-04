@@ -1,5 +1,5 @@
 import Pagination from '@/ui/Pagination/Pagination';
-import { useAppDispatch } from '@/store/hooks';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { setPage } from '@/store/garageUiSlice';
 import RaceControlPanel from './RaceControlPanel/RaceControlPanel';
 import CreateCarForm from './CreateCarForm/CreateCarForm';
@@ -11,12 +11,13 @@ import styles from './GaragePage.module.css';
 function GaragePage() {
   const { cars, total, page, totalPages, isLoading, isError } = useGaragePage();
   const dispatch = useAppDispatch();
+  const isRacing = useAppSelector((state) => state.race.isRacing);
 
   return (
     <div className={styles.page}>
       <h1>Garage ({total})</h1>
       <div className={styles.controlRow}>
-        <RaceControlPanel />
+        <RaceControlPanel isGarageEmpty={!isLoading && !isError && total === 0} cars={cars} />
         <CreateCarForm />
         <UpdateCarForm />
       </div>
@@ -26,6 +27,7 @@ function GaragePage() {
           page={page}
           totalPages={totalPages}
           onPageChange={(nextPage) => dispatch(setPage(nextPage))}
+          disabled={isRacing}
         />
       </div>
     </div>

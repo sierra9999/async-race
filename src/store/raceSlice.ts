@@ -3,11 +3,13 @@ import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 export type CarRaceStatus = 'idle' | 'starting' | 'driving' | 'finished' | 'broken' | 'stopping';
 interface RaceState {
   carStates: Record<number, CarRaceStatus>;
+  isRacing: boolean;
   generation: Record<number, number>;
 }
 
 const initialState: RaceState = {
   carStates: {},
+  isRacing: false,
   generation: {},
 };
 
@@ -18,6 +20,9 @@ const raceSlice = createSlice({
     setCarState(state, action: PayloadAction<{ id: number; status: CarRaceStatus }>) {
       const { id, status } = action.payload;
       state.carStates[id] = status;
+    },
+    setIsRacing(state, action: PayloadAction<boolean>) {
+      state.isRacing = action.payload;
     },
     bumpGeneration(state, action: PayloadAction<number>) {
       const id = action.payload;
@@ -30,5 +35,5 @@ const raceSlice = createSlice({
   },
 });
 
-export const { setCarState, bumpGeneration, forgetCar } = raceSlice.actions;
+export const { setCarState, setIsRacing, bumpGeneration, forgetCar } = raceSlice.actions;
 export default raceSlice.reducer;
