@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { baseApi } from '@/api/baseApi';
 import garageUiReducer from './garageUiSlice';
+import raceReducer from './raceSlice';
 
 export const store = configureStore({
   reducer: {
     garageUi: garageUiReducer,
+    race: raceReducer,
     [baseApi.reducerPath]: baseApi.reducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(baseApi.middleware),
