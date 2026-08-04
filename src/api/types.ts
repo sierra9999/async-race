@@ -3,3 +3,8 @@ export interface Car {
   name: string;
   color: string;
 }
+
+export interface PagedResult<T> {
+  items: T[];
+  total: number;
+}
