@@ -1,4 +1,3 @@
-// src/features/garage/CreateCarForm/CreateCarForm.tsx
 import { useState, type SubmitEventHandler } from 'react';
 import Button from '@/ui/Button/Button';
 import validateCarName from '@/utils/validateCarName';
