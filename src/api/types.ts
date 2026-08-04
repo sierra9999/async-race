@@ -14,3 +14,8 @@ export interface Winner {
   wins: number;
   time: number;
 }
+
+export interface EngineStatus {
+  velocity: number;
+  distance: number;
+}
