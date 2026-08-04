@@ -5,6 +5,7 @@ import { setIsRacing, announceWinner, clearWinner, type CarRaceStatus } from '@/
 import { msToSeconds } from '@/utils/formatTime';
 import type { Car } from '@/api/types';
 import useCarEngine from './useCarEngine';
+import saveWinner from './saveWinner';
 
 const SETTLED_STATES: readonly CarRaceStatus[] = ['finished', 'broken'];
 
@@ -36,6 +37,7 @@ function watchForRaceCompletion(carIds: number[]): void {
 function recordWin(car: Car, durationMs: number): void {
   const timeSec = msToSeconds(durationMs);
   store.dispatch(announceWinner({ name: car.name, timeSec }));
+  saveWinner(car.id, timeSec).catch(() => undefined);
 }
 
 function useRace(): {
