@@ -19,3 +19,20 @@
 .table tbody tr:nth-child(even) {
   background-color: #f9fafb;
 }
+
+.sortButton {
+  padding: 0.2rem 0.4rem;
+  color: inherit;
+  font-weight: 700;
+}
+
+.sortArrow {
+  display: inline-block;
+  width: 1em;
+  margin-left: 0.25rem;
+  text-align: center;
+}
+
+.sortArrowIdle {
+  opacity: 0.35;
+}

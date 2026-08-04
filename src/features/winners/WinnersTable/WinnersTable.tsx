@@ -1,10 +1,15 @@
 import CarIcon from '@/ui/CarIcon/CarIcon';
+import Button from '@/ui/Button/Button';
 import { DEFAULT_CAR_COLOR } from '@/constants';
 import { formatSeconds } from '@/utils/formatTime';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { setSortBy, setOrder, type WinnersSortBy } from '@/store/winnersUiSlice';
 import type { Car, Winner } from '@/api/types';
 import styles from './WinnersTable.module.css';
 
 const UNKNOWN_CAR_NAME = 'Unknown';
+const DEFAULT_SORT_ORDER: Record<WinnersSortBy, 'ASC' | 'DESC'> = { wins: 'DESC', time: 'ASC' };
+
 interface WinnerRowProps {
   winner: Winner;
   car?: Car;
@@ -24,6 +29,42 @@ function WinnerRow({ winner, car = undefined }: WinnerRowProps) {
   );
 }
 
+function SortIndicator({ active, order }: { active: boolean; order: 'ASC' | 'DESC' }) {
+  const classNames = [styles.sortArrow, active ? '' : styles.sortArrowIdle].filter(Boolean);
+  return <span className={classNames.join(' ')}>{order === 'ASC' ? '▲' : '▼'}</span>;
+}
+
+function useSortToggle(): (field: WinnersSortBy) => void {
+  const dispatch = useAppDispatch();
+  const { sortBy, order } = useAppSelector((state) => state.winnersUi);
+
+  return (field: WinnersSortBy) => {
+    if (sortBy === field) {
+      dispatch(setOrder(order === 'ASC' ? 'DESC' : 'ASC'));
+    } else {
+      dispatch(setSortBy(field));
+      dispatch(setOrder(DEFAULT_SORT_ORDER[field]));
+    }
+  };
+}
+
+function SortableHeader({ field, label }: { field: WinnersSortBy; label: string }) {
+  const { sortBy, order } = useAppSelector((state) => state.winnersUi);
+  const toggleSort = useSortToggle();
+
+  return (
+    <th scope="col">
+      <Button className={styles.sortButton} onClick={() => toggleSort(field)}>
+        {label}
+        <SortIndicator
+          active={sortBy === field}
+          order={sortBy === field ? order : DEFAULT_SORT_ORDER[field]}
+        />
+      </Button>
+    </th>
+  );
+}
+
 interface WinnersTableProps {
   winners: Winner[];
   carsById: Record<number, Car>;
@@ -37,8 +78,8 @@ function WinnersTable({ winners, carsById }: WinnersTableProps) {
           <th scope="col">№</th>
           <th scope="col">Car</th>
           <th scope="col">Name</th>
-          <th scope="col">Wins</th>
-          <th scope="col">Best time (s)</th>
+          <SortableHeader field="wins" label="Wins" />
+          <SortableHeader field="time" label="Best time (s)" />
         </tr>
       </thead>
       <tbody>
