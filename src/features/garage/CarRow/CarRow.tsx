@@ -2,9 +2,12 @@ import Button from '@/ui/Button/Button';
 import { useDeleteCarMutation } from '@/api/garageApi';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { setEditForm, resetEditForm } from '@/store/garageUiSlice';
+import { startCarAnimation, resetCarPosition } from '@/features/race/animation';
 import type { Car } from '@/api/types';
 import CarTrack from '../CarTrack/CarTrack';
 import styles from './CarRow.module.css';
+
+const TEMP_DURATION_MS = 3000;
 
 interface CarRowProps {
   car: Car;
@@ -37,11 +40,16 @@ function CarRow({ car }: CarRowProps) {
         </Button>
       </div>
       <div className={styles.stack}>
-        <Button variant="primary">A</Button>
-        <Button>B</Button>
+        <Button
+          variant="primary"
+          onClick={() => startCarAnimation(car.id, TEMP_DURATION_MS, () => {})}
+        >
+          A
+        </Button>
+        <Button onClick={() => resetCarPosition(car.id)}>B</Button>
       </div>
       <span className={styles.name}>{car.name}</span>
-      <CarTrack color={car.color} />
+      <CarTrack carId={car.id} color={car.color} />
     </li>
   );
 }
