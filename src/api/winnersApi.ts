@@ -1,5 +1,16 @@
+import { WINNERS_PAGE_SIZE } from '@/constants';
 import { baseApi } from './baseApi';
-import type { Winner } from './types';
+import { withPageTotal } from './pagination';
+import type { PagedResult, Winner } from './types';
+
+export type WinnerSortField = 'id' | 'wins' | 'time';
+export type WinnerSortOrder = 'ASC' | 'DESC';
+
+interface GetWinnersArgs {
+  page: number;
+  sort: WinnerSortField;
+  order: WinnerSortOrder;
+}
 
 interface WinnerInput {
   id: number;
@@ -7,9 +18,14 @@ interface WinnerInput {
   time: number;
 }
 
-// eslint-disable-next-line import/prefer-default-export -- one endpoints slice
 export const winnersApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
+    getWinners: builder.query<PagedResult<Winner>, GetWinnersArgs>({
+      query: ({ page, sort, order }) =>
+        `/winners?_page=${page}&_limit=${WINNERS_PAGE_SIZE}&_sort=${sort}&_order=${order}`,
+      transformResponse: (winners: Winner[], meta) => withPageTotal(winners, meta),
+      providesTags: ['Winners'],
+    }),
     getWinner: builder.query<Winner, number>({
       query: (id) => `/winners/${id}`,
       providesTags: ['Winners'],
@@ -28,3 +44,5 @@ export const winnersApi = baseApi.injectEndpoints({
     }),
   }),
 });
+
+export const { useGetWinnersQuery } = winnersApi;
