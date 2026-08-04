@@ -3,6 +3,11 @@ import { baseApi } from './baseApi';
 import { withPageTotal } from './pagination';
 import type { Car, PagedResult } from './types';
 
+export interface CarInput {
+  name: string;
+  color: string;
+}
+
 export const garageApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getCars: builder.query<PagedResult<Car>, number>({
@@ -10,6 +15,11 @@ export const garageApi = baseApi.injectEndpoints({
       transformResponse: (cars: Car[], meta) => withPageTotal(cars, meta),
       providesTags: ['Cars'],
     }),
+    createCar: builder.mutation<Car, CarInput>({
+      query: (body) => ({ url: '/garage', method: 'POST', body }),
+      invalidatesTags: ['Cars'],
+    }),
   }),
 });
-export const { useGetCarsQuery } = garageApi;
+
+export const { useGetCarsQuery, useCreateCarMutation } = garageApi;
