@@ -2,8 +2,7 @@ import Button from '@/ui/Button/Button';
 import { useDeleteCarMutation } from '@/api/garageApi';
 import { useAppDispatch, useAppSelector } from '@/store/hooks';
 import { setEditForm, resetEditForm } from '@/store/garageUiSlice';
-import { setCarState, type CarRaceStatus } from '@/store/raceSlice';
-import { resetCarPosition } from '@/features/race/animation';
+import { type CarRaceStatus } from '@/store/raceSlice';
 import useCarEngine from '@/features/race/useCarEngine';
 import type { Car } from '@/api/types';
 import CarTrack from '../CarTrack/CarTrack';
@@ -57,7 +56,7 @@ function CarRow({ car }: CarRowProps) {
   const [deleteCar] = useDeleteCarMutation();
   const selectedCarId = useAppSelector((state) => state.garageUi.editForm.carId);
   const carState = useAppSelector((state) => state.race.carStates[car.id] ?? 'idle');
-  const { start } = useCarEngine();
+  const { start, stop } = useCarEngine();
   const rowLocked = carState !== 'idle';
   const handleSelect = () => {
     dispatch(setEditForm({ carId: car.id, name: car.name, color: car.color }));
@@ -73,14 +72,10 @@ function CarRow({ car }: CarRowProps) {
     }
   };
 
-  const handleStop = () => {
-    resetCarPosition(car.id);
-    dispatch(setCarState({ id: car.id, status: 'idle' }));
-  };
   return (
     <li className={styles.row}>
       <SelectRemoveStack disabled={rowLocked} onSelect={handleSelect} onRemove={handleRemove} />
-      <EngineStack carState={carState} onStart={() => start(car.id)} onStop={handleStop} />
+      <EngineStack carState={carState} onStart={() => start(car.id)} onStop={() => stop(car.id)} />
       <span className={styles.name}>{car.name}</span>
       <CarTrack carId={car.id} color={car.color} />
     </li>

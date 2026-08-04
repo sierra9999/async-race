@@ -2,9 +2,9 @@ import { useCallback } from 'react';
 import type { FetchBaseQueryError } from '@reduxjs/toolkit/query/react';
 import { store } from '@/store';
 import { setCarState, bumpGeneration } from '@/store/raceSlice';
-import { useStartEngineMutation, useDriveMutation } from '@/api/engineApi';
+import { useStartEngineMutation, useStopEngineMutation, useDriveMutation } from '@/api/engineApi';
 import { HTTP_INTERNAL_ERROR } from '@/constants';
-import { startCarAnimation, stopCarAnimation } from './animation';
+import { startCarAnimation, stopCarAnimation, resetCarPosition } from './animation';
 
 function currentGeneration(id: number): number {
   return store.getState().race.generation[id] ?? 0;
@@ -15,6 +15,18 @@ function bumpAndCaptureGeneration(id: number): number {
   return currentGeneration(id);
 }
 type DriveMutation = ReturnType<typeof useDriveMutation>[0];
+type StopMutation = ReturnType<typeof useStopEngineMutation>[0];
+
+function settleStop(id: number, stopEngine: StopMutation): Promise<void> {
+  return stopEngine(id)
+    .unwrap()
+    .catch(() => undefined)
+    .finally(() => {
+      resetCarPosition(id);
+      store.dispatch(setCarState({ id, status: 'idle' }));
+    })
+    .then(() => undefined);
+}
 
 function isEngineBrokenError(error: FetchBaseQueryError): boolean {
   if (error.status === HTTP_INTERNAL_ERROR) {
@@ -78,8 +90,10 @@ function handleStartFailure(id: number, generation: number): void {
 
 function useCarEngine(): {
   start: (id: number, onFinish?: (durationMs: number) => void) => void;
+  stop: (id: number) => Promise<void>;
 } {
   const [startEngine] = useStartEngineMutation();
+  const [stopEngine] = useStopEngineMutation();
   const [drive] = useDriveMutation();
   const start = useCallback(
     (id: number, onFinish?: (durationMs: number) => void) => {
@@ -96,7 +110,18 @@ function useCarEngine(): {
     },
     [startEngine, drive],
   );
-  return { start };
+
+  const stop = useCallback(
+    (id: number): Promise<void> => {
+      store.dispatch(setCarState({ id, status: 'stopping' }));
+      stopCarAnimation(id);
+      store.dispatch(bumpGeneration(id));
+      return settleStop(id, stopEngine);
+    },
+    [stopEngine],
+  );
+
+  return { start, stop };
 }
 
 export default useCarEngine;
