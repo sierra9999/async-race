@@ -1,0 +1,16 @@
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.empty {
+  color: gray;
+  font-style: italic;
+  text-align: center;
+  padding: 3rem 1rem;
+  border: 1px dashed silver;
+  border-radius: 0.3rem;
+}
