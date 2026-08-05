@@ -31,3 +31,10 @@
   background-color: red;
   color: white;
 }
+
+@media (max-width: 520px) {
+  .button {
+    padding: 0.3rem 0.55rem;
+    font-size: 0.75rem;
+  }
+}
