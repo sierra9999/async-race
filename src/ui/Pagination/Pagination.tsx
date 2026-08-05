@@ -14,19 +14,31 @@ function Pagination({ page, totalPages, onPageChange, disabled = false }: Pagina
 
   return (
     <div className={styles.pagination}>
-      <Button disabled={atFirst} onClick={() => onPageChange(1)}>
+      <Button className={styles.pageButton} disabled={atFirst} onClick={() => onPageChange(1)}>
         {'<<'}
       </Button>
-      <Button disabled={atFirst} onClick={() => onPageChange(page - 1)}>
+      <Button
+        className={styles.pageButton}
+        disabled={atFirst}
+        onClick={() => onPageChange(page - 1)}
+      >
         {'<'}
       </Button>
       <span className={styles.label}>
         Page {page}/{totalPages}
       </span>
-      <Button disabled={atLast} onClick={() => onPageChange(page + 1)}>
+      <Button
+        className={styles.pageButton}
+        disabled={atLast}
+        onClick={() => onPageChange(page + 1)}
+      >
         {'>'}
       </Button>
-      <Button disabled={atLast} onClick={() => onPageChange(totalPages)}>
+      <Button
+        className={styles.pageButton}
+        disabled={atLast}
+        onClick={() => onPageChange(totalPages)}
+      >
         {'>>'}
       </Button>
     </div>

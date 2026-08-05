@@ -4,7 +4,6 @@
   align-items: center;
   gap: 0.6rem;
   padding: 0.35rem 0;
-  border-bottom: 1px solid var(--border);
 }
 
 .stack {
