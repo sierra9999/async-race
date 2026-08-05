@@ -9,12 +9,18 @@ function linkClassName({ isActive }: { isActive: boolean }): string {
 function NavTabs() {
   return (
     <nav className={styles.nav}>
-      <NavLink to={ROUTES.GARAGE} end className={linkClassName}>
-        Garage
-      </NavLink>
-      <NavLink to={ROUTES.WINNERS} className={linkClassName}>
-        Winners
-      </NavLink>
+      <div className={styles.tabs}>
+        <NavLink to={ROUTES.GARAGE} end className={linkClassName}>
+          Garage
+        </NavLink>
+        <NavLink to={ROUTES.WINNERS} className={linkClassName}>
+          Winners
+        </NavLink>
+      </div>
+      <span className={styles.logo}>
+        <span className={styles.logoAsync}>Async</span>
+        <span className={styles.logoRace}>Race</span>
+      </span>
     </nav>
   );
 }

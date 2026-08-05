@@ -21,12 +21,13 @@
 
 .lane {
   --car-width: clamp(28px, 7vw, 56px);
-  --finish-width: 12px;
+  --lane-height: 2rem;
+  --finish-width: calc(var(--lane-height) / 2);
 
   position: relative;
   flex: 1 1 auto;
   min-width: 0;
-  height: 2rem;
+  height: var(--lane-height);
   border-radius: 2px;
   background-color: var(--asphalt);
   overflow: hidden;

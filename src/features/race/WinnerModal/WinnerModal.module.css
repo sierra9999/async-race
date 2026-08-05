@@ -37,6 +37,7 @@
   height: 8px;
   background-image: repeating-conic-gradient(var(--text) 0% 25%, var(--bg) 0% 50%);
   background-size: 8px 8px;
+  background-position: center;
 }
 
 .heading {
