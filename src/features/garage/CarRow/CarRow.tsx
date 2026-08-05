@@ -60,7 +60,7 @@ function CarRow({ car }: CarRowProps) {
   const carState = useAppSelector((state) => state.race.carStates[car.id] ?? 'idle');
   const isRacing = useAppSelector((state) => state.race.isRacing);
   const { start, stop } = useCarEngine();
-  const rowLocked = carState !== 'idle';
+  const rowLocked = carState !== 'idle' || isRacing;
   const handleSelect = () => {
     dispatch(setEditForm({ carId: car.id, name: car.name, color: car.color }));
   };

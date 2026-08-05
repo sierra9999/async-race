@@ -10,10 +10,11 @@ import styles from './UpdateCarForm.module.css';
 function UpdateCarForm() {
   const dispatch = useAppDispatch();
   const { carId, name, color } = useAppSelector((state) => state.garageUi.editForm);
+  const isRacing = useAppSelector((state) => state.race.isRacing);
   const [updateCar, { isLoading }] = useUpdateCarMutation();
   const validation = validateCarName(name);
   const noSelection = carId === null;
-  const submitDisabled = noSelection || !validation.valid || isLoading;
+  const submitDisabled = noSelection || !validation.valid || isLoading || isRacing;
   const handleSubmit: SubmitEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault();
     if (carId === null || submitDisabled) return;
@@ -25,7 +26,7 @@ function UpdateCarForm() {
   };
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
-      <fieldset className={styles.fieldset} disabled={noSelection}>
+      <fieldset className={styles.fieldset} disabled={noSelection || isRacing}>
         <legend className={styles.legend}>Update</legend>
         <CarFields
           name={name}

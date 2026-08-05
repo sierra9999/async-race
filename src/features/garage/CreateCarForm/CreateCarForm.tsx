@@ -10,10 +10,11 @@ import styles from './CreateCarForm.module.css';
 function CreateCarForm() {
   const dispatch = useAppDispatch();
   const { name, color } = useAppSelector((state) => state.garageUi.createForm);
+  const isRacing = useAppSelector((state) => state.race.isRacing);
   const [createCar, { isLoading }] = useCreateCarMutation();
   const [touched, setTouched] = useState(false);
   const validation = validateCarName(name);
-  const submitDisabled = !validation.valid || isLoading;
+  const submitDisabled = !validation.valid || isLoading || isRacing;
   const handleSubmit: SubmitEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault();
     setTouched(true);
@@ -26,19 +27,18 @@ function CreateCarForm() {
       // Error state lives on the mutation; never log here.
     }
   };
-  const handleNameChange = (value: string) => {
-    setTouched(true);
-    dispatch(setCreateForm({ name: value }));
-  };
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
-      <fieldset className={styles.fieldset}>
+      <fieldset className={styles.fieldset} disabled={isRacing}>
         <legend className={styles.legend}>Create</legend>
         <CarFields
           name={name}
           color={color}
           hint={touched ? validation.error : ''}
-          onNameChange={handleNameChange}
+          onNameChange={(value) => {
+            setTouched(true);
+            dispatch(setCreateForm({ name: value }));
+          }}
           onColorChange={(value) => dispatch(setCreateForm({ color: value }))}
         />
         <Button variant="primary" type="submit" disabled={submitDisabled}>
