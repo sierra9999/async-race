@@ -1,6 +1,6 @@
 ## Deployment link: https://async-race-solution.vercel.app/
 
-Important! Your browser will ask for **"Apps on device/Access this device"** (local network access) permission — allow it , or the deployed page cannot reach `http://127.0.0.1:3000`.
+_On first visit the browser asks for local network access — allow it, or the page cannot reach `http://127.0.0.1:3000`._
 
 ## Checklist 400/400 pts
 
