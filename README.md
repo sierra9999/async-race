@@ -1,4 +1,4 @@
-## Deployment link: https://async-race-solution.vercel.app/
+## Deployment link: https://async-race-solution.vercel.app
 
 _On first visit the browser asks for local network access — allow it, or the page cannot reach `http://127.0.0.1:3000`._
 
