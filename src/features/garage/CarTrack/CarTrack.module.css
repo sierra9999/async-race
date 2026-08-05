@@ -10,16 +10,37 @@
 .marker {
   font-size: 0.7rem;
   font-weight: 700;
-  color: gray;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
   flex: 0 0 auto;
 }
 
+.markerFinish {
+  color: var(--flame);
+}
+
 .lane {
+  --car-width: clamp(28px, 7vw, 56px);
+  --finish-width: 12px;
+
   position: relative;
   flex: 1 1 auto;
   min-width: 0;
   height: 2rem;
-  border-bottom: 1px dashed gray;
+  border-radius: 2px;
+  background-color: var(--asphalt);
+  overflow: hidden;
+}
+
+.lane::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: var(--car-width);
+  bottom: 0;
+  width: var(--finish-width);
+  background-image: repeating-conic-gradient(var(--text) 0% 25%, var(--bg) 0% 50%);
+  background-size: var(--finish-width) var(--finish-width);
 }
 
 .car {
@@ -27,8 +48,9 @@
   top: 0;
   bottom: 0;
   left: 0;
+  z-index: 1;
   margin: auto 0;
-  width: clamp(24px, 6vw, 48px);
+  width: var(--car-width);
   height: fit-content;
   transform: translateX(0px);
   will-change: transform;

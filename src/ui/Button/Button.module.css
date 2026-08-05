@@ -1,35 +1,48 @@
 .button {
   border: 1px solid transparent;
-  border-radius: 0.3rem;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
+  border-radius: var(--radius);
+  padding: 0.35rem 0.7rem;
+  font-size: 0.8125rem;
   font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
   cursor: pointer;
   white-space: nowrap;
 }
 
 .button:disabled {
   cursor: not-allowed;
-  opacity: 0.5;
-}
-
-.button:hover:not(:disabled) {
-  opacity: 0.7;
+  opacity: 0.4;
 }
 
 .primary {
-  background-color: blue;
-  color: white;
+  background-color: var(--flame);
+  border-color: var(--flame-deep);
+  color: var(--on-flame);
+}
+
+.primary:hover:not(:disabled) {
+  background-color: var(--flame-hot);
 }
 
 .secondary {
-  background-color: lightgrey;
-  color: black;
+  background-color: var(--steel);
+  border-color: var(--border-strong);
+  color: var(--on-steel);
+}
+
+.secondary:hover:not(:disabled) {
+  background-color: var(--steel-hot);
 }
 
 .danger {
-  background-color: red;
-  color: white;
+  background-color: var(--danger);
+  border-color: var(--danger);
+  color: var(--on-danger);
+}
+
+.danger:hover:not(:disabled) {
+  background-color: var(--danger-hot);
 }
 
 @media (max-width: 520px) {

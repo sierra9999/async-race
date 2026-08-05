@@ -1,11 +1,12 @@
 .notFound {
   padding: 3rem 1rem;
   text-align: center;
-  color: #374151;
+  color: var(--text-muted);
 }
+
 .link {
   display: inline-block;
   margin-top: 0.5rem;
-  color: #2563eb;
+  color: var(--flame);
   font-weight: 600;
 }

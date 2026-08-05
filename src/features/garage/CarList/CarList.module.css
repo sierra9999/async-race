@@ -7,10 +7,10 @@
 }
 
 .empty {
-  color: gray;
+  color: var(--text-muted);
   font-style: italic;
   text-align: center;
   padding: 3rem 1rem;
-  border: 1px dashed silver;
-  border-radius: 0.3rem;
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius);
 }

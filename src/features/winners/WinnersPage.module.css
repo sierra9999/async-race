@@ -1,5 +1,5 @@
 .page {
-  padding: 1rem;
+  padding: 1.5rem 1rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -8,17 +8,17 @@
 }
 
 .empty {
-  color: #6b7280;
+  color: var(--text-muted);
   font-style: italic;
   text-align: center;
   padding: 3rem 1rem;
-  border: 1px dashed #d1d5db;
-  border-radius: 0.5rem;
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius);
 }
 
 .footer {
   display: flex;
   justify-content: center;
   padding-top: 0.75rem;
-  border-top: 1px solid #e5e7eb;
+  border-top: 1px solid var(--border);
 }

@@ -1,23 +1,28 @@
 .nav {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  padding: 1rem;
+  gap: 0.25rem;
+  padding: 0 1rem;
+  background-color: var(--surface);
+  border-bottom: 1px solid var(--border);
 }
 
 .link {
   text-decoration: none;
-  font-weight: 600;
-  color: inherit;
-  border-radius: 0.3rem;
-  border: 1px solid black;
-  background-color: wheat;
+  font-weight: 700;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  padding: 0.9rem 1rem;
+  border-bottom: 2px solid transparent;
 }
 
 .link:hover {
-  background-color: yellowgreen;
+  color: var(--text);
 }
 
 .linkActive {
-  background-color: yellowgreen;
+  color: var(--flame);
+  border-bottom-color: var(--flame);
 }

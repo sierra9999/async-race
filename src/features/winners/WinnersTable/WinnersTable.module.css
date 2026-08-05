@@ -6,23 +6,30 @@
 
 .table th,
 .table td {
-  padding: 0.5rem 0.75rem;
-  border-bottom: 1px solid #e5e7eb;
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid var(--border);
   vertical-align: middle;
 }
 
 .table thead th {
+  font-size: 0.75rem;
   font-weight: 700;
-  color: #374151;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  border-bottom-color: var(--border-strong);
 }
 
 .table tbody tr:nth-child(even) {
-  background-color: #f9fafb;
+  background-color: var(--surface);
+}
+
+.table tbody tr:hover {
+  background-color: var(--surface-2);
 }
 
 .sortButton {
   padding: 0.2rem 0.4rem;
-  color: inherit;
   font-weight: 700;
 }
 
@@ -31,8 +38,10 @@
   width: 1em;
   margin-left: 0.25rem;
   text-align: center;
+  color: var(--flame);
 }
 
 .sortArrowIdle {
-  opacity: 0.35;
+  opacity: 0.5;
+  color: inherit;
 }

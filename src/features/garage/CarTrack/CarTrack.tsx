@@ -47,7 +47,7 @@ function CarTrack({ carId, color }: CarTrackProps) {
           <CarIcon color={color} />
         </div>
       </div>
-      <span className={styles.marker}>FINISH</span>
+      <span className={`${styles.marker} ${styles.markerFinish}`}>FINISH</span>
     </div>
   );
 }

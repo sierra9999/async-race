@@ -7,7 +7,10 @@
 
 .label {
   font-size: 0.875rem;
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
   min-width: 5rem;
   text-align: center;
 }
